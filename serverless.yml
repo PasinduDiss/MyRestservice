@@ -1,40 +1,76 @@
-# Welcome to Serverless!
-#
-# This file is the main config file for your service.
-# It's very minimal at this point and uses default values.
-# You can always add more config options for more control.
-# We've included some commented out config examples here.
-# Just uncomment any of them to get that config option.
-#
-# For full config options, check the docs:
-#    docs.serverless.com
-#
-# Happy Coding!
 
-service: serverless-go-boilerplate
+service: MyRestservice
 
 provider:
   name: aws
   runtime: go1.x
-  stage: dev
-  region: ap-southeast-1
+  region: ap-southeast-2
 
 package:
  individually: true
  exclude:
    - ./**
 
+environment:
+      DEVICES_TABLE_NAME: ${self:custom.DevicesTableName}
+      iamRoleStatements: #Defines what other AWS services out lambda function can access
+        - Effect: Allow # Allow access to DynamoDB tables
+          Action:
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+            - ${self:custom.DevicesTableArn}
+custom:
+  DevicesTableName: Devices
+  DevicesTableArn:  #ARN are addresses of deployed services in AWS space
+    Fn::Join:
+      - ":"
+      - - arn
+        - aws
+        - dynamodb
+        - Ref: AWS::Region
+        - Ref: AWS::AccountId
+        - table/${self:custom.DevicesTableName}
+
 functions:
-  hello:
-    handler: bin/handlers/hello
+
+  create:
+    handler: bin/handlers/create
     package:
      include:
-       - ./bin/handlers/hello
+       - ./bin/handlers/create
     events:
       - http:
-          path: hello
-          method: get
+          path: /api/devices
+          method: post
           cors: true
 
-# resources:
-#   Resources: # Supporting AWS services
+    list:
+      handler: bin/handlers/list
+      package:
+       include:
+         - ./bin/handlers/list
+      events:
+        - http:
+            path: /api/devices{id}
+            method: get
+            cors: true
+
+resources:
+  Resources:
+    DevicesDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        TableName: ${self:custom.DevicesTableName}
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
