@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 ./scripts/build.sh
-serverless deploy
+serverless deploy --aws-profile serverless

@@ -1,18 +1,18 @@
-
 service: MyRestservice
 
-provider:
-  name: aws
-  runtime: go1.x
-  region: ap-southeast-2
-
 package:
- individually: true
- exclude:
-   - ./**
+  individually: true
+  exclude:
+    - ./**
 
-environment:
-      DEVICES_TABLE_NAME: ${self:custom.DevicesTableName}
+provider:
+      name: aws
+      runtime: go1.x
+      stage: dev
+      region: ap-southeast-2
+
+      environment:
+        DEVICES_TABLE_NAME: ${self:custom.devicesTableName}
       iamRoleStatements: #Defines what other AWS services out lambda function can access
         - Effect: Allow # Allow access to DynamoDB tables
           Action:
@@ -22,10 +22,33 @@ environment:
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
           Resource:
-            - ${self:custom.DevicesTableArn}
+            - ${self:custom.devicesTableArn}
+
+functions:
+  create:
+    handler: ./bin/handlers/create
+    package:
+      include:
+        - ./bin/handlers/create
+    events:
+      - http:
+          path: /api/devices
+          method: post
+          cors: true
+  list:
+    handler: ./bin/handlers/list
+    package:
+      include:
+        - ./bin/handlers/list
+    events:
+      - http:
+          path: /api/devices
+          method: get
+          cors: true
+
 custom:
-  DevicesTableName: Devices
-  DevicesTableArn:  #ARN are addresses of deployed services in AWS space
+  devicesTableName: Devices
+  devicesTableArn:  #ARN are addresses of deployed services in AWS space
     Fn::Join:
       - ":"
       - - arn
@@ -33,41 +56,18 @@ custom:
         - dynamodb
         - Ref: AWS::Region
         - Ref: AWS::AccountId
-        - table/${self:custom.DevicesTableName}
+        - table/${self:custom.devicesTableName}
 
-functions:
-
-  create:
-    handler: bin/handlers/create
-    package:
-     include:
-       - ./bin/handlers/create
-    events:
-      - http:
-          path: /api/devices
-          method: post
-          cors: true
-
-    list:
-      handler: bin/handlers/list
-      package:
-       include:
-         - ./bin/handlers/list
-      events:
-        - http:
-            path: /api/devices{id}
-            method: get
-            cors: true
-
-resources:
-  Resources:
-    DevicesDynamoDbTable:
+resource:
+  Resource: #Supporting Aws services
+    DevicesDynamoDBTable: #Define a new DynamoDB Table resource to store device info
       Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
       Properties:
-        TableName: ${self:custom.DevicesTableName}
+        TableName: ${self:custom.devicesTableName}
         ProvisionedThroughput:
-          ReadCapacityUnits: 5
-          WriteCapacityUnits: 5
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S

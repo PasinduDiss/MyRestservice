@@ -1,3 +1,4 @@
+// src/handlers/create.go
 package main
 
 import (
@@ -12,11 +13,9 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
-
-	"github.com/satori/go.uuid"
 )
 
-type Devices struct {
+type Device struct {
 	ID          string `json:"id"`
 	DeviceModel string `json:"deviceModel"`
 	Name        string `json:"name"`
@@ -28,36 +27,32 @@ var ddb *dynamodb.DynamoDB
 
 func init() {
 	region := os.Getenv("AWS_REGION")
-	if session, err := session.NewSession(&aws.Config{
+	if session, err := session.NewSession(&aws.Config{ // Use aws sdk to connect to dynamoDB
 		Region: &region,
 	}); err != nil {
 		fmt.Println(fmt.Sprintf("Failed to connect to AWS: %s", err.Error()))
 	} else {
-		ddb = dynamodb.New(session) // create dynamodb client
+		ddb = dynamodb.New(session) // Create DynamoDB client
 	}
 }
 
 func create(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	fmt.Println("Creating Device")
+	fmt.Println("create")
 
 	var (
-		id          = uuid.Must(uuid.NewV4(), nil).String()
-		deviceModel = uuid.Must(uuid.NewV4(), nil).String()
-		name        = uuid.Must(uuid.NewV4(), nil).String()
-		note        = uuid.Must(uuid.NewV4(), nil).String()
-		serial      = uuid.Must(uuid.NewV4(), nil).String()
-		tableName   = aws.String(os.Getenv("DEVICES_TABLE_NAME"))
+		tableName = aws.String(os.Getenv("DEVICES_TABLE_NAME"))
 	)
 
-	device := &Devices{
-		ID:          id,
-		DeviceModel: deviceModel,
-		Name:        name,
-		Note:        note,
-		Serial:      serial,
+	// Initialize todo
+	device := &Device{
+		ID:          " ",
+		DeviceModel: " ",
+		Name:        " ",
+		Note:        " ",
+		Serial:      " ",
 	}
 
-	//Parse requested body
+	// Parse request body
 	json.Unmarshal([]byte(request.Body), device)
 
 	// Write to DynamoDB
