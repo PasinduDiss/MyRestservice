@@ -16,7 +16,7 @@ import (
 )
 
 type Device struct {
-	ID          string `json:"id"`
+	Id          string `json:"id"`
 	DeviceModel string `json:"deviceModel"`
 	Name        string `json:"name"`
 	Note        string `json:"note"`
@@ -27,29 +27,28 @@ var ddb *dynamodb.DynamoDB
 
 func init() {
 	region := os.Getenv("AWS_REGION")
-	if session, err := session.NewSession(&aws.Config{ // Use aws sdk to connect to dynamoDB
+	if session, err := session.NewSession(&aws.Config{
 		Region: &region,
 	}); err != nil {
-		fmt.Println(fmt.Sprintf("Failed to connect to AWS: %s", err.Error()))
+		fmt.Println(fmt.Sprintf("AWS connection failed: %s", err.Error()))
 	} else {
-		ddb = dynamodb.New(session) // Create DynamoDB client
+		ddb = dynamodb.New(session)
 	}
 }
 
-func create(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	fmt.Println("create")
+func Create(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
 	var (
 		tableName = aws.String(os.Getenv("DEVICES_TABLE_NAME"))
 	)
 
-	// Initialize todo
+	// Initialize device struct
 	device := &Device{
-		ID:          " ",
-		DeviceModel: " ",
-		Name:        " ",
-		Note:        " ",
-		Serial:      " ",
+		Id:          "",
+		DeviceModel: "",
+		Name:        "",
+		Note:        "",
+		Serial:      "",
 	}
 
 	// Parse request body
@@ -61,20 +60,25 @@ func create(ctx context.Context, request events.APIGatewayProxyRequest) (events.
 		Item:      item,
 		TableName: tableName,
 	}
-	if _, err := ddb.PutItem(input); err != nil {
-		return events.APIGatewayProxyResponse{ // Error HTTP response
+
+	if _, err := ddb.PutItem(input); err != nil { // HTTP response internal server error
+
+		return events.APIGatewayProxyResponse{
 			Body:       err.Error(),
 			StatusCode: 500,
 		}, nil
-	} else {
-		body, _ := json.Marshal(device)
-		return events.APIGatewayProxyResponse{ // Success HTTP response
+
+	} else { // HTTP Success response, Item created in dynamodb
+		body := "Created"
+
+		return events.APIGatewayProxyResponse{
 			Body:       string(body),
-			StatusCode: 200,
+			StatusCode: 201,
 		}, nil
+
 	}
 }
 
 func main() {
-	lambda.Start(create)
+	lambda.Start(Create)
 }

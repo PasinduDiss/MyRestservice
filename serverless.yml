@@ -8,14 +8,14 @@ package:
 provider:
       name: aws
       runtime: go1.x
-      stage: dev
-      region: ap-southeast-2
+      region: us-east-1
 
       environment:
         DEVICES_TABLE_NAME: ${self:custom.devicesTableName}
       iamRoleStatements: #Defines what other AWS services out lambda function can access
         - Effect: Allow # Allow access to DynamoDB tables
           Action:
+            - dynamodb:Query
             - dynamodb:Scan
             - dynamodb:GetItem
             - dynamodb:PutItem
@@ -25,16 +25,17 @@ provider:
             - ${self:custom.devicesTableArn}
 
 functions:
-  create:
+  createitem:
     handler: ./bin/handlers/create
     package:
       include:
         - ./bin/handlers/create
     events:
       - http:
-          path: /api/devices
+          path: /devices
           method: post
           cors: true
+
   list:
     handler: ./bin/handlers/list
     package:
@@ -42,9 +43,33 @@ functions:
         - ./bin/handlers/list
     events:
       - http:
-          path: /api/devices
+          path: /devices
           method: get
           cors: true
+
+  getitem:
+      handler: ./bin/handlers/get
+      package:
+        include:
+            - ./bin/handlers/get
+      events:
+        - http:
+            path: /devices/{id}
+            method: get
+            cors: true
+
+
+  deleteitem:
+      handler: ./bin/handlers/delete
+      package:
+        include:
+            - ./bin/handlers/delete
+      events:
+        - http:
+            path: /devices/{id}
+            method: delete
+            cors: true
+
 
 custom:
   devicesTableName: Devices
@@ -66,8 +91,8 @@ resource:
       Properties:
         TableName: ${self:custom.devicesTableName}
         ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
