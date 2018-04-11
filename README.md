@@ -50,24 +50,23 @@ How to invoke REST calls
 Using curl :
 
 **POST Request**
-
-
+```
 curl -H "Content-Type: application/json" -X POST -d '{
 "id": "ID","deviceModel": "DEVICE_MODEL", "name": "NAME","note": "NOTE","serial": "SERIAL"}' https://9mm0tq0pc5.execute-api.us-east-1.amazonaws.com/dev/devices
-
+```
 **GET Request**
+```
 This function will list the
 curl -H "Content-Type: application/json" -X GET https://9mm0tq0pc5.execute-api.us-east-1.amazonaws.com/dev/devices
-
-
+```
 **GET Request With Parameters**
-
+```
 curl -H "Content-Type: application/json" -X GET https://9mm0tq0pc5.execute-api.us-east-1.amazonaws.com/dev/devices/{id}
-
+```
 **DELETE Request**
-
+```
 curl -H "Content-Type: application/json" -X DELETE https://9mm0tq0pc5.execute-api.us-east-1.amazonaws.com/dev/devices/{id}
-
+```
 Testing
 _______
 Postman was used to test the API, the postman collection and tests are included can be found [here](MyRestservice.json)
