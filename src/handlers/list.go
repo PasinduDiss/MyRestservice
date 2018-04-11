@@ -16,7 +16,7 @@ import (
 
 //Device struct used to represent a single device
 type Device struct {
-	ID          string `json:"id"`
+	Id          string `json:"id"`
 	DeviceModel string `json:"deviceModel"`
 	Name        string `json:"name"`
 	Note        string `json:"note"`

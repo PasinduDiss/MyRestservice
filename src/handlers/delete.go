@@ -29,7 +29,7 @@ func Delete(ctx context.Context, request events.APIGatewayProxyRequest) (events.
 
 	// Parse id from request body
 	var (
-		id        = request.PathParameters["{id}"]
+		id        = request.PathParameters["id"]
 		tableName = aws.String(os.Getenv("DEVICES_TABLE_NAME"))
 	)
 

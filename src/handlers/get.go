@@ -15,6 +15,7 @@ import (
 )
 
 type Device struct {
+	//Struct represents the
 	Id          string `json:"id"`
 	DeviceModel string `json:"deviceModel"`
 	Name        string `json:"name"`
