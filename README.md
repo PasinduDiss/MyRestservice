@@ -20,6 +20,19 @@ The following is a simple rest api created using the following tech stack
 - AWS DynamoDb no sql database
 - AWS API gateway
 
+Deploying Serverless Rest API
+-----------------------------
+Prerequisites:
+- Serverless framework: > - npm install -g serverless
+- Golang
+- dep brew: > - install dep && brew upgrade dep
+
+
+
+
+
+
+
 
 How to invoke REST calls
 ------
@@ -46,5 +59,4 @@ curl -H "Content-Type: application/json" -X DELETE https://9mm0tq0pc5.execute-ap
 
 Testing
 _______
-Postman was used to test the API, the postman collection and tests are included
-[collection](MyRestservice.json)
+Postman was used to test the API, the postman collection and tests are included can be found [here](MyRestservice.json)
