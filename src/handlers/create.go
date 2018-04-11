@@ -43,6 +43,9 @@ func init() {
 }
 
 func Create(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	/*
+	   implemets the create lambda function linked to the API's POST request
+	*/
 
 	var (
 		tableName = aws.String(os.Getenv("DEVICES_TABLE_NAME"))
@@ -53,11 +56,13 @@ func Create(ctx context.Context, request events.APIGatewayProxyRequest) (events.
 
 	// Parse request body
 	json.Unmarshal([]byte(request.Body), device)
+
+	// Validate data retrieved from request body
 	validationerr := ValidateInput(device)
 
 	if validationerr != nil {
-
-		return events.APIGatewayProxyResponse{ // HTTP Bad request,
+		// HTTP Bad request, if not all fields are included
+		return events.APIGatewayProxyResponse{
 			Body:       "Bad request",
 			StatusCode: 400,
 		}, nil

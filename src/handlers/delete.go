@@ -15,6 +15,10 @@ import (
 var ddb *dynamodb.DynamoDB
 
 func init() {
+	/*
+		Init function runs before main
+		Using aws-sdk creates a connection to Dynamodb
+	*/
 	region := os.Getenv("AWS_REGION")
 	if session, err := session.NewSession(&aws.Config{ // Use aws sdk to connect to dynamoDB
 		Region: &region,
@@ -27,13 +31,17 @@ func init() {
 
 func Delete(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
-	// Parse id from request body
+	/*
+	 Implemets the Delete lambda function linked to the API's DELETE request
+	 deleting one item from the dynamodb
+	*/
+
 	var (
 		id        = request.PathParameters["id"]
 		tableName = aws.String(os.Getenv("DEVICES_TABLE_NAME"))
 	)
 
-	// Delete device
+	// input created for dynamodb.DeleteItem
 	input := &dynamodb.DeleteItemInput{
 		Key: map[string]*dynamodb.AttributeValue{
 			"id": {
@@ -42,18 +50,19 @@ func Delete(ctx context.Context, request events.APIGatewayProxyRequest) (events.
 		},
 		TableName: tableName,
 	}
+
+	//Delete item frm dynamodb
 	_, err := ddb.DeleteItem(input)
 
 	if err != nil {
 
-		return events.APIGatewayProxyResponse{
+		return events.APIGatewayProxyResponse{ //HTTP response internal server error
 			Body:       err.Error(),
 			StatusCode: 500,
 		}, nil
 
 	} else {
-
-		return events.APIGatewayProxyResponse{
+		return events.APIGatewayProxyResponse{ //HTTP Success response
 			StatusCode: 203,
 		}, nil
 	}

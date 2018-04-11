@@ -48,19 +48,26 @@ func init() {
 }
 
 func list(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-
+	/*
+		Implemets the list lambda function linked to the API's GET request,
+		which returns the list of items in the dynamodb table
+	*/
 	var (
 		tableName = aws.String(os.Getenv("DEVICES_TABLE_NAME"))
 	)
-
+	//Creating necesary input fo dynamodb.Scan function
 	input := &dynamodb.ScanInput{
 		TableName: tableName,
 	}
+	//Get contents of dynamodb table
 	result, _ := ddb.Scan(input)
 
 	var devices []Device
 
 	for _, i := range result.Items {
+		/*loop through items recived by API Gateway, create Device objects
+		appened to deviced list
+		*/
 		device := Device{}
 		if err := dynamodbattribute.UnmarshalMap(i, &device); err != nil {
 			fmt.Println("Failed to unmarshal")
@@ -69,10 +76,10 @@ func list(ctx context.Context, request events.APIGatewayProxyRequest) (events.AP
 		devices = append(devices, device)
 	}
 
-	body, _ := json.Marshal(&ListDeviceResponse{
+	body, _ := json.Marshal(&ListDeviceResponse{ // convert devices list in to json
 		Devices: devices,
 	})
-	return events.APIGatewayProxyResponse{
+	return events.APIGatewayProxyResponse{ // HTTP Success
 		Body:       string(body),
 		StatusCode: 200,
 	}, nil

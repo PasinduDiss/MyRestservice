@@ -42,11 +42,12 @@ func init() {
 
 func get(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	/*
-	   Handler function , used to retrive item from DynamoDB
+		   Implemets the create lambda function linked to the API's GET request
+			 returning one item from the dynamodb
 	*/
 
-	// get id value from the requests path parameters
-	// get table name from environment variable set
+	// get id value from the request's path parameters
+	// get table name from environment variables
 	var (
 		id        = request.PathParameters["id"]
 		tableName = aws.String(os.Getenv("DEVICES_TABLE_NAME"))

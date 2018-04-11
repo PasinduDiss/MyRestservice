@@ -36,7 +36,7 @@ install dep && brew upgrade dep
 
 **Deploy:**
 
-Mac :
+Mac/linux :
 
 Through terminal navigate to MyRestservice directory enter command:
 
