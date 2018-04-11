@@ -74,7 +74,22 @@ This script will build and place all executable files in the bin folder
 It also deploys the functions using "serverless deploy --aws-profile serverless"
 command, you may need to edit this command if you do not have your aws-profile
 configured for serverless. If aws-profile is configured as default there is no
-need for the --aws-profile flag. The command "severless deploy" should be used.  
+need for the --aws-profile flag. The command "severless deploy" should be used.
+
+
+The script remove.sh can be used to remove the deployed service, invoked by the
+command:
+
+```
+scripts/remove.sh
+```
+
+The script build.sh can be used to build the handler functions without deploying
+the service, build can be invoked by:
+
+```
+scripts/build.sh
+```
 
 How to invoke REST calls
 ------
