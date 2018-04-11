@@ -62,16 +62,19 @@ This function will list all items from the dynamodb table
 ```
 curl -H "Content-Type: application/json" -X GET https://9mm0tq0pc5.execute-api.us-east-1.amazonaws.com/dev/devices
 ```
-**GET Request With Parameters**
+**GET Request (get single item)**
+
 This function will get a single item from the dynamodb table according to the provided path variable
 ```
 curl -H "Content-Type: application/json" -X GET https://9mm0tq0pc5.execute-api.us-east-1.amazonaws.com/dev/devices/{id}
 ```
 **DELETE Request**
-This function will delet a single item from the dynamodb table according to the provided path variable 
+
+This function will delet a single item from the dynamodb table according to the provided path variable
 ```
 curl -H "Content-Type: application/json" -X DELETE https://9mm0tq0pc5.execute-api.us-east-1.amazonaws.com/dev/devices/{id}
 ```
 Testing
-_______
+-------
+
 Postman was used to test the API, the postman collection and tests are included can be found [here](MyRestservice.json)
