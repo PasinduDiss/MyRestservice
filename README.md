@@ -23,9 +23,23 @@ The following is a simple rest api created using the following tech stack
 Deploying Serverless Rest API
 -----------------------------
 Prerequisites:
-- Serverless framework: > npm install -g serverless
+
+- Serverless framework:
+```
+npm install -g serverless
+```
 - Golang
-- dep brew: > install dep && brew upgrade dep
+- dep brew:
+```
+install dep && brew upgrade dep
+```
+
+Deploy:
+
+Navigate to MyRestservice directory enter command
+```
+scripts/deploy.sh
+```
 
 
 
