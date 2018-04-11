@@ -50,20 +50,25 @@ How to invoke REST calls
 Using curl :
 
 **POST Request**
+
+This function will insert items into the dynamodb table
 ```
 curl -H "Content-Type: application/json" -X POST -d '{
 "id": "ID","deviceModel": "DEVICE_MODEL", "name": "NAME","note": "NOTE","serial": "SERIAL"}' https://9mm0tq0pc5.execute-api.us-east-1.amazonaws.com/dev/devices
 ```
 **GET Request**
+
+This function will list all items from the dynamodb table
 ```
-This function will list the
 curl -H "Content-Type: application/json" -X GET https://9mm0tq0pc5.execute-api.us-east-1.amazonaws.com/dev/devices
 ```
 **GET Request With Parameters**
+This function will get a single item from the dynamodb table according to the provided path variable
 ```
 curl -H "Content-Type: application/json" -X GET https://9mm0tq0pc5.execute-api.us-east-1.amazonaws.com/dev/devices/{id}
 ```
 **DELETE Request**
+This function will delet a single item from the dynamodb table according to the provided path variable 
 ```
 curl -H "Content-Type: application/json" -X DELETE https://9mm0tq0pc5.execute-api.us-east-1.amazonaws.com/dev/devices/{id}
 ```
