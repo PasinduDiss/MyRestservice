@@ -28,19 +28,19 @@ Deploying Serverless Rest API
 │   └── handlers               
 │       ├── create.go
 │       ├── get.go
-│├── list.go	     
+│  ├── list.go	     
 │       └── delete.go
 ├── bin
 │   └── handlers               
 │       ├── create
 │       ├── get
-│├── list	     
+│    ├── list	     
 │       └── delete
 │
 ├── scripts
 │    ├── build.sh
 │    ├── deploy.sh
-│└── remove.sh
+│  └── remove.sh
 │
 │
 ├── serverless.yml
