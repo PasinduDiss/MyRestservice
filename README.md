@@ -24,28 +24,29 @@ Deploying Serverless Rest API
 -----------------------------
 **Contents**
 ```
-├── src
-│   └── handlers               
-│       ├── create.go
-│       ├── get.go
-│       ├── list.go	     
-│       └── delete.go
-├── bin
-│   └── handlers               
-│       ├── create
-│       ├── get
-│       ├── list	     
-│       └── delete
-├── scripts
-│    ├── build.sh
-│    ├── deploy.sh
-│    └── remove.sh
-|
-├── serverless.yml
-├── MyRestservice.json   
-├── Gopkg.lock
-├── README.md                     
-└── Gopkg.toml
+MyRestservice
+      ├── src
+      │   └── handlers               
+      │       ├── create.go
+      │       ├── get.go
+      │       ├── list.go	     
+      │       └── delete.go
+      ├── bin
+      │   └── handlers               
+      │       ├── create
+      │       ├── get
+      │       ├── list	     
+      │       └── delete
+      ├── scripts
+      │    ├── build.sh
+      │    ├── deploy.sh
+      │    └── remove.sh
+      |
+      ├── serverless.yml
+      ├── MyRestservice.json   
+      ├── Gopkg.lock
+      ├── README.md                     
+      └── Gopkg.toml
 
 ```
 
