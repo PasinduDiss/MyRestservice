@@ -22,7 +22,7 @@ The following is a simple rest api created using the following tech stack
 
 Deploying Serverless Rest API
 -----------------------------
-Prerequisites:
+**Prerequisites:**
 
 - Serverless framework:
 ```
@@ -34,18 +34,15 @@ npm install -g serverless
 install dep && brew upgrade dep
 ```
 
-Deploy:
+**Deploy:**
 
-Navigate to MyRestservice directory enter command
+Mac :
+
+Through terminal navigate to MyRestservice directory enter command:
+
 ```
 scripts/deploy.sh
 ```
-
-
-
-
-
-
 
 
 How to invoke REST calls
