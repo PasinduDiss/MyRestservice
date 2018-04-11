@@ -22,6 +22,34 @@ The following is a simple rest api created using the following tech stack
 
 Deploying Serverless Rest API
 -----------------------------
+**Contents**
+```
+├── src
+│   └── handlers               
+│       ├── create.go
+│       ├── get.go
+│		    ├── list.go	     
+│       └── delete.go
+├── bin
+│   └── handlers               
+│       ├── create
+│       ├── get
+│		    ├── list	     
+│       └── delete
+│
+├── scripts
+│    ├── build.sh
+│    ├── deploy.sh
+│	   └── remove.sh
+│
+│
+├── serverless.yml
+├── MyRestservice.json   
+├── Gopkg.lock
+├── README.md                     
+└── Gopkg.toml
+```
+
 **Prerequisites:**
 
 - Serverless framework:
@@ -33,7 +61,6 @@ npm install -g serverless
 ```
 install dep && brew upgrade dep
 ```
-
 **Deploy:**
 
 Mac/linux :
