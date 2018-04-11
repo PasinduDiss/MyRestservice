@@ -70,7 +70,11 @@ Through terminal navigate to MyRestservice directory enter command:
 ```
 scripts/deploy.sh
 ```
-
+This script will build and place all executable files in the bin folder
+It also deploys the functions using "serverless deploy --aws-profile serverless"
+command, you may need to edit this command if you do not have your aws-profile
+configured for serverless. If aws-profile is configured as default there is no
+need for the --aws-profile flag. The command "severless deploy" should be used.  
 
 How to invoke REST calls
 ------
