@@ -69,13 +69,9 @@ func Create(ctx context.Context, request events.APIGatewayProxyRequest) (events.
 		}, nil
 
 	} else { // HTTP Success response, Item created in dynamodb
-		body := "Created"
-
 		return events.APIGatewayProxyResponse{
-			Body:       string(body),
 			StatusCode: 201,
 		}, nil
-
 	}
 }
 

@@ -84,8 +84,8 @@ func get(ctx context.Context, request events.APIGatewayProxyRequest) (events.API
 	} else { // Success HTTP request
 		device := Device{}
 		dynamodbattribute.UnmarshalMap(result.Item, &device)
-		device.Id = string(request.Path) + device.Id
-		device.DeviceModel = string(request.Path) + device.DeviceModel
+		device.Id = string(request.Path)
+		device.DeviceModel = "/deviceModel/" + device.DeviceModel
 		body, _ := json.Marshal(device)
 
 		return events.APIGatewayProxyResponse{
