@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+dep ensure 
 echo "Compiling functions to bin/handlers/ ..."
 
 rm -rf bin/

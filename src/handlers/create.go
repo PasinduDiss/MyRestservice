@@ -113,9 +113,9 @@ func ValidateInput(device *Device) error {
 	if device.Serial == "" {
 		return ErrMissingField
 	}
-	var re = regexp.MustCompile(device.Id)
-	device.Id = re.ReplaceAllString(device.Id, `^\/.*\/`)
-	device.DeviceModel = re.ReplaceAllString(device.DeviceModel, `^\/.*\/`)
+	var re = regexp.MustCompile(`^\/.*\/`)
+	device.Id = re.ReplaceAllString(device.Id, "")
+	device.DeviceModel = re.ReplaceAllString(device.DeviceModel, "")
 	return nil
 }
 
