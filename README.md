@@ -123,4 +123,10 @@ curl -H "Content-Type: application/json" -X DELETE https://9mm0tq0pc5.execute-ap
 Testing
 -------
 
-Postman was used to test the API, the postman collection and tests are included can be found [here](MyRestservice.json)
+Postman was used to test the API, the postman collection and tests are included can be found [here](MyRestservice.postman_collection.json)
+
+To run unit tests follow the commands below and run the test.sh script
+```
+cd MyRestservice
+/scripts/test.sh
+```

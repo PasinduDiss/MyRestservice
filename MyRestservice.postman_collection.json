@@ -1,0 +1,244 @@
+{
+	"id": "ad7b1a74-9e0c-4ec7-94bc-54ddac76c32f",
+	"name": "My Rest API",
+	"description": "",
+	"auth": null,
+	"events": null,
+	"variables": [
+		{
+			"key": "id",
+			"value": "/devices/id10",
+			"description": "",
+			"type": "text",
+			"disabled": false
+		},
+		{
+			"key": "deviceModel",
+			"value": "/deviceModel/id10",
+			"description": "",
+			"type": "text",
+			"disabled": false
+		},
+		{
+			"key": "name",
+			"value": "Sensor10",
+			"description": "",
+			"type": "text",
+			"disabled": false
+		},
+		{
+			"key": "note",
+			"value": "Testing Sensor10",
+			"description": "",
+			"type": "text",
+			"disabled": false
+		},
+		{
+			"key": "serial",
+			"value": "A020000102",
+			"description": "",
+			"type": "text",
+			"disabled": false
+		}
+	],
+	"order": [
+		"b539a8e1-cbb5-4203-b26c-07002b906767",
+		"40159135-fb10-4fcc-8b28-f4a73a75f10e",
+		"fbd31f2e-cd88-4a24-8d02-382b9ea5f5a3",
+		"998d1508-fa7a-4981-9624-231e49dfcda2",
+		"7ae43171-6f5f-4679-a184-7d89c7cf5d50",
+		"1e21ace3-94a9-4260-ba99-2ac2b9cc0646"
+	],
+	"folders_order": [],
+	"folders": [],
+	"requests": [
+		{
+			"id": "1e21ace3-94a9-4260-ba99-2ac2b9cc0646",
+			"name": "MyRestApi Post when bad request",
+			"url": "https://xox3imgc04.execute-api.us-east-1.amazonaws.com/dev/devices",
+			"description": "Post request when providing incomplete input data",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e6d6d76e-20d3-4eab-b254-5231ce150316",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function(){",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				}
+			],
+			"folder": null,
+			"rawModeData": "{\n\"id\": \"/devices/id10\",\n\"deviceModel\": \"/devicemodels/id10\", \"name\": \"Sensor10\",\n\"serial\": \"A020000100\"\n}\n",
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "40159135-fb10-4fcc-8b28-f4a73a75f10e",
+			"name": "MyRestApi Post request",
+			"url": "https://xox3imgc04.execute-api.us-east-1.amazonaws.com/dev/devices",
+			"description": "Enter new data into the devices dynamodb table",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d43996b0-9eaa-4e7a-aa8b-b8a477f31fba",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 201\", function(){",
+							"    pm.response.to.have.status(201);",
+							"});"
+						]
+					}
+				}
+			],
+			"folder": null,
+			"rawModeData": "{\n\"id\": \"/devices/id13\",\n\"deviceModel\": \"/deviceModel/id13\", \"name\": \"Sensor13\",\n\"note\": \"Testing a sensor13\",\n\"serial\": \"A020000113\"\n}\n",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "7ae43171-6f5f-4679-a184-7d89c7cf5d50",
+			"name": "MyRestApi Post request- request id does not exist",
+			"url": "https://xox3imgc04.execute-api.us-east-1.amazonaws.com/dev/devices/notid",
+			"description": "Post request where the request Id does not exit",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b20e67b5-e4ec-4099-bac5-91513cf3dad3",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 404 Not Found\", function(){",
+							"    pm.response.to.have.status(404);",
+							"});"
+						]
+					}
+				}
+			],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "998d1508-fa7a-4981-9624-231e49dfcda2",
+			"name": "MyRestApi Delete request",
+			"url": "https://xox3imgc04.execute-api.us-east-1.amazonaws.com/dev/devices/id13",
+			"description": "MyRestApi Delete request deletes the item from dynamodb table as specified in path",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "76d85934-3dd6-431b-b8ee-1d5f7047dc79",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 203\", function(){",
+							"    pm.response.to.have.status(203);",
+							"});"
+						]
+					}
+				}
+			],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "b539a8e1-cbb5-4203-b26c-07002b906767",
+			"name": "MyRestApi List sensors",
+			"url": "https://xox3imgc04.execute-api.us-east-1.amazonaws.com/dev/devices",
+			"description": "This request lists the contetnts of the devices dynamodb table",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f0508bee-7886-4e29-af86-12bc3db7e293",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "fbd31f2e-cd88-4a24-8d02-382b9ea5f5a3",
+			"name": "MyRestApi get request",
+			"url": "https://xox3imgc04.execute-api.us-east-1.amazonaws.com/dev/devices/id1",
+			"description": "Gets the item from the dynamodb as specified in path ",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "944c787b-002b-49c4-9b50-68a06c9aeb24",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		}
+	]
+}
