@@ -179,3 +179,12 @@ cd MyRestservice
 ```
 
 Postman was also used to test the API, the postman collection and tests are included can be found [here](MyRestservice.postman_collection.json)
+
+Assumptions
+-------
+
+- deviceModel value stored in dynamod db without the recource path "/deviceModel/" thus in the case of {id : /devices/id1, deviceModel: /deviceModel/id1} both values would be stored as "id1"
+
+- It is assumed the data sent using POST Http method is of the format {"id":"/devices/id1","deviceModel":"/deviceModel/id1","name":"Sensor","note":"Testing a sensor.","serial":"A020000101"}
+
+- It is assumed the data recived using GET Http method with path parameters (/devices/{id})is of the format {"id":"/devices/id1","deviceModel":"/deviceModel/id1","name":"Sensor","note":"Testing a sensor.","serial":"A020000101"}
