@@ -59,12 +59,13 @@ MyRestservice
       │    ├── deploy.sh
       │    └── test.sh
       │ 
-      ├── serverless.yml                #serverless.yml a yaml file used to specify  
-      ├── MyRestservice.json             resources to be used by api as well as stating
-      ├── Gopkg.lock                     stating the functions to be created
-      ├── README.md                     
-      └── Gopkg.toml
-
+      ├── serverless.yml                # serverless.yml a yaml file used to specify  
+      ├── MyRestservice.json              resources to be used by api as well as 
+      ├── Gopkg.lock                      stating stating the functions to be created
+      ├── README.md                      
+      └── Gopkg.toml                    # MyRestservice.json contains a postman
+                                          collection to test REST API 
+                                          
 ```
 
 **Prerequisites:**
