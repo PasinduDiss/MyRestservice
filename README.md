@@ -39,7 +39,7 @@ MyRestservice
       │          │     ├── delete_test.go
       │          │     └── main.go      
       │          │
-      │  	      ├── get
+      │  	 ├── get
       │          │    ├── get_test.go
       │          │    └── main.go 
       │          │
