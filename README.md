@@ -127,6 +127,7 @@ The script test.sh can be used to run the unit tests as well as the live tests, 
 
 ```
 scripts/test.sh
+```
 
 Windows :
 
