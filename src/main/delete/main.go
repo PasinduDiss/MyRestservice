@@ -8,10 +8,13 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
+/*App struct is used by unit tests as well as the regular implementation of the
+lambda functions*/
 type App struct {
 	Handler handler.Client
 }
 
+//DeleteHandler function used to invoke the lambda fuction Delete
 func (a *App) DeleteHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
 	handler, error := a.Handler.Delete(ctx, request)

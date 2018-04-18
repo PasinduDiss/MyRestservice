@@ -46,7 +46,7 @@ func init() {
 	}
 }
 
-// Client interface created for the mainfunction to access lambda functions
+// Client interface implicitly implemented by DeviceClient data type and TestDeviceClient data types
 type Client interface {
 	Get(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error)
 	Create(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error)
@@ -54,7 +54,7 @@ type Client interface {
 	List(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error)
 }
 
-// DeviceClient is a structure
+// DeviceClient is a structure implements Client interface
 type DeviceClient struct{}
 
 //Create lambda function POSTs items to dynamodb
@@ -275,7 +275,7 @@ func (d DeviceClient) List(ctx context.Context, request events.APIGatewayProxyRe
 	}, nil
 }
 
-//TestDeviceClient is created for the purpose of unit testing
+//TestDeviceClient is created for the purpose of unit testing and implements Client inteface
 type TestDeviceClient struct {
 	response events.APIGatewayProxyResponse
 	Err      error

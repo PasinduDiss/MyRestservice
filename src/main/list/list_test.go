@@ -11,6 +11,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+/*
+TestList is used to unit test the main.go function in the list package
+which invokes the list lambda function
+*/
 func TestList(t *testing.T) {
 	var devclient handler.TestDeviceClient
 	app := &main.App{Handler: devclient}

@@ -8,7 +8,7 @@ cd src/main/
 for i in *; do 
   cd $i
   for f in *.go; do
-    
+    #Skip compiling test files
     if ! [[ "${f}" == *test* ]]; then   
       if GOOS=linux go build -o "../../../bin/handlers/$i" ${f}; then
         echo "✓ Compiled $i"

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 cd src/main/
 for i in *; do 
   echo "Testing $i" 

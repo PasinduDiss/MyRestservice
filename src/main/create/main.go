@@ -8,11 +8,13 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
+/*App struct is used by unit tests as well as the regular implementation of the
+lambda functions*/
 type App struct {
 	Handler handler.Client
 }
 
-//CreateHandler function
+//CreateHandler function used to invoke the lambda fuction Create
 func (a *App) CreateHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
 	handler, error := a.Handler.Create(ctx, request)
