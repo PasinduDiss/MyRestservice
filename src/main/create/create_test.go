@@ -1,7 +1,7 @@
 package main_test
 
 import (
-	main "ServerlessRestAPI/src/main/create"
+	main "MyRestservice/src/main/create"
 	"context"
 	"testing"
 

@@ -1,7 +1,7 @@
 package main
 
 import (
-	handler "ServerlessRestAPI/src/handlers"
+	handler "MyRestservice/src/handlers"
 	"context"
 
 	"github.com/aws/aws-lambda-go/events"
