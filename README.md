@@ -24,47 +24,55 @@ Deploying Serverless Rest API
 -----------------------------
 **Contents**
 ```
-MyRestservice 
+MyRestservice
       ├── src
       │   ├──handlers               
-      │   │         └── handlers.go        # contains lambda the functions   
+      │   │         └── handlers.go         # contains lambda the functions   
       │   │             
       │   │                             
-      │   └── main                        # main package to create binaries of lambda
-      │          ├── create                 functions  
-      │          │     ├── create_test.go
-      │          │     └── main.go 
-      │          │          
-      │          ├── delete
-      │          │     ├── delete_test.go
-      │          │     └── main.go      
-      │          │
-      │  	 ├── get          
-      │          │    ├── get_test.go
-      │          │    └── main.go 
-      │          │
-      │          └── list
-      │               ├── get_test.go      
-      │               └── main.go  
-      │ 
-      ├── bin                            # bin file contains binary files of lambda 
-      │   └── handlers                     functions
+      │   ├── main                         # main package to create binaries of lambda functions
+      │   │      ├── create
+      │   │      │     ├── create_test.go
+      │   │      │     └── main.go 
+      │   │      │          
+      │   │      ├── delete
+      │   │      │     ├── delete_test.go
+      │   │      │     └── main.go      
+      │   │      │
+      │   │	     ├── get
+      │   │      │    ├── get_test.go
+      │   │      │    └── main.go 
+      │   │      │
+      │   │      └── list
+      │   │            ├── get_test.go      
+      │   │            └── main.go  
+      │   │
+      │   └──tests                        # Live unit tests for each lambda function
+      │        ├── listlive_test.go
+      │        │
+      │        ├── deletelive_test.go
+      │        │
+      │        ├── getlive_test.go
+      │        │ 
+      │        └── createlive_test.go
+      │   
+      ├── bin                    # bin file contains binary files of lambda functions
+      │   └── handlers               
       │       ├── create
       │       ├── get
       │       ├── list	     
       │       └── delete
       │ 
-      ├── scripts                        # Scripts used to build, deploy and test
-      │    ├── build.sh                    lambda functions
+      ├── scripts                # Scripts used to build, deploy and test lambda functions
+      │    ├── build.sh
       │    ├── deploy.sh
       │    └── test.sh
       │ 
-      ├── serverless.yml                # serverless.yml a yaml file used to specify  
-      ├── MyRestservice.json              resources to be used by api as well as 
-      ├── Gopkg.lock                      stating stating the functions to be created
-      ├── README.md                      
-      └── Gopkg.toml                    # MyRestservice.json contains a postman
-                                          collection to test REST API 
+      ├── serverless.yml        # serverless.yml a yaml file used to specify  
+      ├── MyRestservice.json   
+      ├── Gopkg.lock
+      ├── README.md                     
+      └── Gopkg.toml            # MyRestservice.json contains a postman collection to test REST API
                                           
 ```
 **Directory Structure and Information** 

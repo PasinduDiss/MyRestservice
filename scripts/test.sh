@@ -8,3 +8,6 @@ for i in *; do
   cd ..
 done
 echo "Done."
+cd ../tests
+echo "Running live tests"
+go test
