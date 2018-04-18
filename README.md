@@ -104,7 +104,7 @@ install dep && brew upgrade dep
 
 Mac/linux :
 
-Through terminal navigate to MyRestservice directory enter command:
+Through terminal navigate to root directory of project:
 
 ```
 scripts/deploy.sh
@@ -116,19 +116,20 @@ configured for serverless. If aws-profile is configured as default there is no
 need for the --aws-profile flag. The command "severless deploy" should be used.
 
 
-The script remove.sh can be used to remove the deployed service, invoked by the
-command:
-
-```
-scripts/remove.sh
-```
-
 The script build.sh can be used to build the handler functions without deploying
 the service, build can be invoked by:
 
 ```
 scripts/build.sh
 ```
+
+The script test.sh can be used to run the handler functions without deploying
+the service, testing can be invoked by:
+
+```
+scripts/test.sh
+
+
 
 How to invoke REST calls
 ------
