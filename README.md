@@ -77,11 +77,17 @@ MyRestservice
 ```
 **Directory Structure and Information** 
 
-Src (source directory) contains the handlers directory and main directory. The handlers directory contains the handlers.go file, this file is used to create the lambda functions used in the various REST API calls. The main directory contains four subdirectories, create, get, delete and list. These subdirectories are named according to their corresponding lambda functions. Each of these directories contain main.go files of the main package which is necessary in order to create the separate binary files which correspond to each function. The main.go files need to be separated in this manner due to Go language which do not allow for more than one main function in a given directory. The subdirectories under the main directory also contains unit tests for each lambda function.
+Src (source directory) contains the handlers directory and main directory. The handlers directory contains the handlers.go file, which is used to create the lambda functions used in the various REST API calls. The main directory contains four subdirectories: create, get, delete and list. 
 
-The bin directory contains binaries which are automatically generated when running the build script. These binaries are used by the serverless framework to deploy the lambda functions specified. 
+These subdirectories are named according to their corresponding lambda functions. Each of these directories contain main.go files of the main package which is necessary in order to create the separate binary files which correspond to each function. The main.go files need to be separated in this manner due to the Go language not allowing for more than one main function in a given directory. 
 
-The scripts directory contains the scripts build.sh deploy.sh and test.sh. The build script should be used when building the binary files of the lambda functions as it compiles all main.go files in the subdirectories of the main directory and creates the binary files with the corresponding directory name in the bin directory. If you would like to build and deploy, the deploy script can be used since it will run the build script and then proceed to deploy the REST API. 
+The subdirectories under the main directory also contain unit tests for each lambda function. The bin directory contains binaries which are automatically generated when running the build or deploy scripts. These binaries are used by the serverless framework to deploy the lambda functions specified. 
+
+The scripts directory contains the scripts build.sh, deploy.sh and test.sh. The build script should be used when building the binary files of the lambda functions as it compiles all main.go files in the subdirectories of the main directory and creates the binary files with the corresponding directory name in the bin directory. 
+
+If you would like to build and deploy, the deploy script can be used, it will run the build script and then proceed to deploy the REST API
+
+There are two different types of tests, live tests which use HTTP requests to interact with the deployed REST API and unit tests for each main.go function.
 
 **Prerequisites:**
 
@@ -155,11 +161,10 @@ curl -H "Content-Type: application/json" -X DELETE https://xox3imgc04.execute-ap
 ```
 Testing
 -------
-
-Postman was used to test the API, the postman collection and tests are included can be found [here](MyRestservice.postman_collection.json)
-
-To run unit tests follow the commands below and run the test.sh script
+To run unit tests and the live tests follow the commands below and run the test.sh script
 ```
 cd MyRestservice
 /scripts/test.sh
 ```
+
+Postman was also used to test the API, the postman collection and tests are included can be found [here](MyRestservice.postman_collection.json)
