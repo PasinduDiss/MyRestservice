@@ -91,6 +91,8 @@ There are two different types of tests, live tests which use HTTP requests to in
 
 **Prerequisites:**
 
+Ensure the repository is cloned in to a known GOPATH/src 
+
 - Serverless framework:
 ```
 npm install -g serverless
