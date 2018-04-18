@@ -27,11 +27,11 @@ Deploying Serverless Rest API
 MyRestservice 
       ├── src
       │   ├──handlers               
-      │   │         └── handlers.go  #contains lambda the functions   
+      │   │         └── handlers.go        #contains lambda the functions   
       │   │             
       │   │                             
-      │   └── main
-      │          ├── create
+      │   └── main                        # main package to create binaries of lambda
+      │          ├── create                 functions  
       │          │     ├── create_test.go
       │          │     └── main.go 
       │          │          
@@ -39,7 +39,7 @@ MyRestservice
       │          │     ├── delete_test.go
       │          │     └── main.go      
       │          │
-      │  	 ├── get
+      │  	 ├── get          
       │          │    ├── get_test.go
       │          │    └── main.go 
       │          │
@@ -47,21 +47,21 @@ MyRestservice
       │               ├── get_test.go      
       │               └── main.go  
       │ 
-      ├── bin
-      │   └── handlers               
+      ├── bin                            # bin file contains binary files of lambda 
+      │   └── handlers                     functions
       │       ├── create
       │       ├── get
       │       ├── list	     
       │       └── delete
       │ 
-      ├── scripts
-      │    ├── build.sh
+      ├── scripts                        # Scripts used to build, deploy and test
+      │    ├── build.sh                    lambda functions
       │    ├── deploy.sh
       │    └── test.sh
       │ 
-      ├── serverless.yml
-      ├── MyRestservice.json   
-      ├── Gopkg.lock
+      ├── serverless.yml                #serverless.yml a yaml file used to specify  
+      ├── MyRestservice.json             resources to be used by api as well as stating
+      ├── Gopkg.lock                     stating the functions to be created
       ├── README.md                     
       └── Gopkg.toml
 
