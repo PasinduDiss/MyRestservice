@@ -83,9 +83,9 @@ These subdirectories are named according to their corresponding lambda functions
 
 The subdirectories under the main directory also contain unit tests for each lambda function. The bin directory contains binaries which are automatically generated when running the build or deploy scripts. These binaries are used by the serverless framework to deploy the lambda functions specified. 
 
-The scripts directory contains the scripts build.sh, deploy.sh and test.sh. The build script should be used when building the binary files of the lambda functions as it compiles all main.go files in the subdirectories of the main directory and creates the binary files with the corresponding directory name in the bin directory. 
+The scripts directory contains the scripts build.sh, deploy.sh and test.sh. The build.sh script should be used if you would like to compile the lambda functions but not deploy as it compiles all main.go files in the subdirectories of the main directory and creates the binary files with the corresponding directory name in the bin directory. 
 
-If you would like to build and deploy, the deploy script can be used, it will run the build script and then proceed to deploy the REST API
+If you would like to build and deploy, the deploy.sh script can be used, it will run the build script and then proceed to deploy the REST API
 
 There are two different types of tests, live tests which use HTTP requests to interact with the deployed REST API and unit tests for each main.go function.
 
