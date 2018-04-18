@@ -24,7 +24,7 @@ Deploying Serverless Rest API
 -----------------------------
 **Contents**
 ```
-MyRestservice
+MyRestservice 
       ├── src
       │   ├──handlers               
       │   │         └── handlers.go  #contains lambda the functions   
