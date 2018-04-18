@@ -46,7 +46,7 @@ func init() {
 	}
 }
 
-//Client interface created for the mainfunction to access lambda functions
+// Client interface created for the mainfunction to access lambda functions
 type Client interface {
 	Get(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error)
 	Create(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error)
@@ -273,4 +273,34 @@ func (d DeviceClient) List(ctx context.Context, request events.APIGatewayProxyRe
 		Body:       string(body),
 		StatusCode: 200,
 	}, nil
+}
+
+//TestDeviceClient is created for the purpose of unit testing
+type TestDeviceClient struct {
+	response events.APIGatewayProxyResponse
+	Err      error
+}
+
+//Get function created for unit  testing
+func (d TestDeviceClient) Get(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	d.response.Body = request.Body
+	return d.response, d.Err
+}
+
+//Create function created for unit  testing
+func (d TestDeviceClient) Create(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	d.response.Body = request.Body
+	return d.response, d.Err
+}
+
+//Delete function created for unit  testing
+func (d TestDeviceClient) Delete(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	d.response.Body = request.Body
+	return d.response, d.Err
+}
+
+//List function created for unit  testing
+func (d TestDeviceClient) List(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	d.response.Body = request.Body
+	return d.response, d.Err
 }

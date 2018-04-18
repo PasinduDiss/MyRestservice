@@ -9,17 +9,18 @@ import (
 )
 
 type App struct {
-	handler handler.DeviceClient
+	Handler handler.Client
 }
 
-//CreateHandler function uses
+//CreateHandler function
 func (a *App) CreateHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
-	handler, error := a.handler.Create(ctx, request)
+	handler, error := a.Handler.Create(ctx, request)
 	return handler, error
 }
 
 func main() {
-	var app App
+	var devclient handler.DeviceClient
+	app := &App{Handler: devclient}
 	lambda.Start(app.CreateHandler)
 }

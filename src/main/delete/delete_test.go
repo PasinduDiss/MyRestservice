@@ -1,38 +1,61 @@
 package main_test
 
 import (
+	handler "MyRestservice/src/handlers"
 	main "MyRestservice/src/main/delete"
 	"context"
+	"fmt"
 	"testing"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCreate(t *testing.T) {
-	id := make(map[string]string)
-	id["id"] = "id1"
-	var CTX events.APIGatewayProxyRequestContext
+/*
+TestCreate is used to unit test the main.go function in the delete package
+which invokes the delete lambda function
+*/
+func TestDelete(t *testing.T) {
+
+	var devclient handler.TestDeviceClient
+	app := &main.App{Handler: devclient}
 
 	tests := []struct {
-		request            events.APIGatewayProxyRequest
-		responseBody       string
+		description        string
+		deviceclient       *handler.TestDeviceClient
 		expectedStatuscode int
-		err                error
+		expectedBody       string
 	}{
 		{
-			request:            events.APIGatewayProxyRequest{RequestContext: CTX, HTTPMethod: "POST", Body: ""},
-			responseBody:       "Internal server error",
+			description:        "Server error",
+			deviceclient:       &devclient,
 			expectedStatuscode: 500,
-			err:                nil,
+			expectedBody:       "Internal Server error",
+		},
+		{
+			description:        "Item Successfully deleted",
+			deviceclient:       &devclient,
+			expectedStatuscode: 203,
+			expectedBody:       "",
+		},
+		{
+			description:        "Resource Not found",
+			deviceclient:       &devclient,
+			expectedStatuscode: 404,
+			expectedBody:       "Not Found",
 		},
 	}
-	app := &main.App{}
+
 	for _, test := range tests {
 		var ctx context.Context
 		var response events.APIGatewayProxyResponse
-		response, err := app.DeleteHandler(ctx, test.request)
-		assert.IsType(t, test.err, err)
-		assert.Equal(t, test.expectedStatuscode, response.StatusCode)
+		var request events.APIGatewayProxyRequest
+		request.Body = test.expectedBody
+
+		response, err := app.DeleteHandler(ctx, request)
+		if err != nil {
+			fmt.Println(err)
+		}
+		assert.Equal(t, test.expectedBody, response.Body)
 	}
 }

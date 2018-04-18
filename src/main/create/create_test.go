@@ -1,38 +1,55 @@
 package main_test
 
 import (
+	handler "MyRestservice/src/handlers"
 	main "MyRestservice/src/main/create"
 	"context"
+	"fmt"
 	"testing"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/stretchr/testify/assert"
 )
 
+/*
+TestCreate is used to unit test the main.go function in the create package
+which invokes the create lambda function
+*/
 func TestCreate(t *testing.T) {
-	id := make(map[string]string)
-	id["id"] = "id1"
-	var CTX events.APIGatewayProxyRequestContext
+
+	var devclient handler.TestDeviceClient
+	app := &main.App{Handler: devclient}
 
 	tests := []struct {
-		request            events.APIGatewayProxyRequest
-		responseBody       string
+		description        string
+		deviceclient       *handler.TestDeviceClient
 		expectedStatuscode int
-		err                error
+		expectedBody       string
 	}{
 		{
-			request:            events.APIGatewayProxyRequest{RequestContext: CTX, HTTPMethod: "POST", Body: ""},
-			responseBody:       "Bad Request",
+			description:        "Testing Bad request",
+			deviceclient:       &devclient,
 			expectedStatuscode: 400,
-			err:                nil,
+			expectedBody:       "Bad Request",
+		},
+		{
+			description:        "Testing Bad request",
+			deviceclient:       &devclient,
+			expectedStatuscode: 201,
+			expectedBody:       "Created",
 		},
 	}
-	app := &main.App{}
+
 	for _, test := range tests {
 		var ctx context.Context
 		var response events.APIGatewayProxyResponse
-		response, err := app.CreateHandler(ctx, test.request)
-		assert.IsType(t, test.err, err)
-		assert.Equal(t, test.expectedStatuscode, response.StatusCode)
+		var request events.APIGatewayProxyRequest
+		request.Body = test.expectedBody
+
+		response, err := app.CreateHandler(ctx, request)
+		if err != nil {
+			fmt.Println(err)
+		}
+		assert.Equal(t, test.expectedBody, response.Body)
 	}
 }

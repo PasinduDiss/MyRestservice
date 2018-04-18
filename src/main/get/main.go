@@ -9,17 +9,18 @@ import (
 )
 
 type App struct {
-	handler handler.DeviceClient
+	Handler handler.Client
 }
 
 func (a *App) GetHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
-	handler, error := a.handler.Get(ctx, request)
+	handler, error := a.Handler.Get(ctx, request)
 
 	return handler, error
 }
 
 func main() {
-	var app App
+	var devclient handler.DeviceClient
+	app := &App{Handler: devclient}
 	lambda.Start(app.GetHandler)
 }

@@ -13,7 +13,7 @@ Pasindu Dissanayake
 
 Abstract
 --------
-The following is a simple rest api created using the following tech stack
+The following is a simple rest api created using the tech stack below
 - Serverless framework  
 - Golang
 - AWS Lambda functions

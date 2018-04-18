@@ -9,17 +9,18 @@ import (
 )
 
 type App struct {
-	handler handler.DeviceClient
+	Handler handler.Client
 }
 
 func (a *App) DeleteHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
-	handler, error := a.handler.Delete(ctx, request)
+	handler, error := a.Handler.Delete(ctx, request)
 
 	return handler, error
 }
 
 func main() {
-	var app App
+	var devclient handler.DeviceClient
+	app := &App{Handler: devclient}
 	lambda.Start(app.DeleteHandler)
 }

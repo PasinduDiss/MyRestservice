@@ -10,18 +10,19 @@ import (
 
 //App struct
 type App struct {
-	handler handler.DeviceClient
+	Handler handler.Client
 }
 
 //ListHandler Returns lambda function from handler package
 func (a *App) ListHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
-	handler, error := a.handler.List(ctx, request)
+	handler, error := a.Handler.List(ctx, request)
 
 	return handler, error
 }
 
 func main() {
-	var app App
+	var devclient handler.DeviceClient
+	app := &App{Handler: devclient}
 	lambda.Start(app.ListHandler)
 }

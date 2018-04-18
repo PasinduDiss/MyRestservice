@@ -42,6 +42,7 @@ func TestCreateLive(t *testing.T) {
 
 	fmt.Println("Live testing Create")
 	client := &http.Client{}
+
 	for _, test := range tests {
 		if test.request == "POST" {
 			var newDevice = []byte(`{
