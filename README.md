@@ -26,22 +26,39 @@ Deploying Serverless Rest API
 ```
 MyRestservice
       ├── src
-      │   └── handlers               
-      │       ├── create.go
-      │       ├── get.go
-      │       ├── list.go	     
-      │       └── delete.go
+      │   ├──handlers               
+      │   │         └── handlers.go  #contains lambda the functions   
+      │   │             
+      │   │                             
+      │   └── main
+      │          ├── create
+      │          │     ├── create_test.go
+      │          │     └── main.go 
+      │          │          
+      │          ├── delete
+      │          │     ├── delete_test.go
+      │          │     └── main.go      
+      │          │
+      │  	     ├── get
+      │          │    ├── get_test.go
+      │          │    └── main.go 
+      │          │
+      │          └── list
+      │               ├── get_test.go      
+      │               └── main.go  
+      │ 
       ├── bin
       │   └── handlers               
       │       ├── create
       │       ├── get
       │       ├── list	     
       │       └── delete
+      │ 
       ├── scripts
       │    ├── build.sh
       │    ├── deploy.sh
-      │    └── remove.sh
-      |
+      │    └── test.sh
+      │ 
       ├── serverless.yml
       ├── MyRestservice.json   
       ├── Gopkg.lock
