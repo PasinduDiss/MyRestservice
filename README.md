@@ -190,3 +190,5 @@ Assumptions
 - It is assumed the data sent using POST Http method is of the format {"id":"/devices/id1","deviceModel":"/deviceModel/id1","name":"Sensor","note":"Testing a sensor.","serial":"A020000101"}
 
 - It is assumed the data recived using GET Http method with path parameters (/devices/{id})is of the format {"id":"/devices/id1","deviceModel":"/deviceModel/id1","name":"Sensor","note":"Testing a sensor.","serial":"A020000101"}
+
+- It is assumed that a dynamodb resource named Devices exists in region us-east-1 in the aws account used for deployment. 
