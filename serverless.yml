@@ -83,8 +83,8 @@ custom:
         - Ref: AWS::AccountId
         - table/${self:custom.devicesTableName}
 
-resource:
-  Resource: #Supporting Aws services
+resources:
+  Resources: #Supporting Aws services
     DevicesDynamoDBTable: #Define a new DynamoDB Table resource to store device info
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
