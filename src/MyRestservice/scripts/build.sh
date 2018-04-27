@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+echo "Updating packages..."
 dep ensure 
 echo "Compiling functions to bin/handlers/ ..."
 

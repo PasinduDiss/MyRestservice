@@ -16,6 +16,8 @@ is implemented where we assert for a success response from the POST request resp
 GET request response.
 */
 func TestDeleteLive(t *testing.T) {
+	var ENDPOINT string
+	ENDPOINT = "https://xox3imgc04.execute-api.us-east-1.amazonaws.com/dev/devices"
 
 	tests := []struct {
 		request            string
@@ -26,21 +28,21 @@ func TestDeleteLive(t *testing.T) {
 	}{
 		{
 			request:            "POST",
-			Url:                "https://xox3imgc04.execute-api.us-east-1.amazonaws.com/dev/devices",
+			Url:                ENDPOINT,
 			expectedStatuscode: 201,
 			expectedBody:       "",
 			err:                nil,
 		},
 		{
 			request:            "DELETE",
-			Url:                "https://xox3imgc04.execute-api.us-east-1.amazonaws.com/dev/devices/id13",
+			Url:                ENDPOINT + "/id13",
 			expectedStatuscode: 203,
 			expectedBody:       "",
 			err:                nil,
 		},
 		{
 			request:            "GET",
-			Url:                "https://xox3imgc04.execute-api.us-east-1.amazonaws.com/dev/devices/id13",
+			Url:                ENDPOINT + "/id13",
 			expectedStatuscode: 404,
 			expectedBody:       "",
 			err:                nil,

@@ -9,6 +9,8 @@ import (
 )
 
 func TestListLive(t *testing.T) {
+	var ENDPOINT string
+	ENDPOINT = "https://xox3imgc04.execute-api.us-east-1.amazonaws.com/dev/devices"
 
 	tests := []struct {
 		request            string
@@ -17,7 +19,7 @@ func TestListLive(t *testing.T) {
 		err                error
 	}{
 		{
-			request:            "https://xox3imgc04.execute-api.us-east-1.amazonaws.com/dev/devices",
+			request:            ENDPOINT,
 			expectedStatuscode: 200,
 			expectedBody:       "",
 			err:                nil,

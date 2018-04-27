@@ -16,6 +16,9 @@ while the next request is to trigger a 404 Not Found response by providing an in
 */
 func TestGetLive(t *testing.T) {
 
+	var ENDPOINT string
+	ENDPOINT = "https://xox3imgc04.execute-api.us-east-1.amazonaws.com/dev/devices"
+
 	tests := []struct {
 		request            string
 		expectedStatuscode int
@@ -23,13 +26,13 @@ func TestGetLive(t *testing.T) {
 		err                error
 	}{
 		{
-			request:            "https://xox3imgc04.execute-api.us-east-1.amazonaws.com/dev/devices/id1",
+			request:            ENDPOINT,
 			expectedStatuscode: 200,
 			expectedBody:       "",
 			err:                nil,
 		},
 		{
-			request:            "https://xox3imgc04.execute-api.us-east-1.amazonaws.com/dev/devices/noid",
+			request:            ENDPOINT + "/noid",
 			expectedStatuscode: 404,
 			expectedBody:       "Not Found",
 			err:                nil,

@@ -146,19 +146,7 @@ the service, build can be invoked by:
 scripts/build.sh
 ```
 
-The script test.sh can be used to run the unit tests, testing can be invoked by:
 
-```
-scripts/test.sh
-```
-
-For live tests you can use the following command, ensure the end points for live test
-
-```
-scripts/livetest.sh
-```
-
-Live test using Postman, please edit the provided Postman collection with the endpoints generated for each POST, GET(list), GET(item), DELETE  request. 
 
 Windows :
 
@@ -202,6 +190,22 @@ curl -H "Content-Type: application/json" -X DELETE https://Your-end-point-url/{i
 ```
 Testing
 -------
+The script test.sh can be used to run the unit tests, testing can be invoked by:
+
+```
+scripts/test.sh
+```
+
+For live tests you can use the following command, ensure the ENDPOINT variable in live test go files are replaced with your own endpoints generated.
+
+```
+scripts/livetest.sh
+```
+
+To live test using Postman, please edit the provided Postman collection with the endpoints generated for each POST, GET(list), GET(item), DELETE  request. 
+
+
+
 To run unit tests follow the commands below and run the test.sh script
 
 ```
