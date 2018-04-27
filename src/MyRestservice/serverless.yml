@@ -87,7 +87,7 @@ resources:
   Resources: #Supporting Aws services
     DevicesDynamoDBTable: #Define a new DynamoDB Table resource to store device info
       Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
+      DeletionPolicy: Delete
       Properties:
         TableName: ${self:custom.devicesTableName}
         ProvisionedThroughput:

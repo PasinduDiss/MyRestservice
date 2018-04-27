@@ -100,6 +100,7 @@ Ensure you have followed the Prerequisites and set up GOROOT and GOPATH variable
 cd MyRestserviceWorkspace
 export GOPATH=`pwd`
 ```
+This will ensure the GOPATH variable points to MyRestserviceWorkspace, you can now navigate to src/MyRestservice project and deploy!
 
 **Directory Structure and Information** 
 
