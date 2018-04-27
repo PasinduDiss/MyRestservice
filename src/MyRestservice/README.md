@@ -22,7 +22,7 @@ The following is a simple rest api created using the tech stack below
 
 Deploying Serverless Rest API
 -----------------------------
-**Contents**
+**Project Contents**
 ```
 MyRestservice
       ├── src
@@ -75,6 +75,32 @@ MyRestservice
       └── Gopkg.toml            # MyRestservice.json contains a postman collection to test REST API
                                           
 ```
+**Prerequisites:**
+
+Ensure the repository is cloned in to a known GOPATH/src 
+
+- Serverless framework:
+```
+npm install -g serverless
+```
+- Golang install
+
+- dep brew:
+```
+install dep && brew upgrade dep
+```
+Please ensure you add GOROOT and GOPATH variables to the your .bash_profile
+Instructions can be found in this [video](https://www.youtube.com/watch?v=FTDOW8UbKjQ&t=252s) 
+
+**Setup**
+Go does not allow for projects in multiple GOPATHS, thus it is recommended to use one go workspace for development. This repository contains a go workspace with the serverless REST API go project contained in the source (src) folder of the go workspace. This was done deliberately to ensure you are able to run the project in any directory to which this repository is cloned. Please follow the following steps to ensure the GOPATH environment variable points to this workspace.
+
+Ensure you have followed the Prerequisites and set up GOROOT and GOPATH variables in your bash_profile
+```
+cd MyRestserviceWorkspace
+export GOPATH=`pwd`
+```
+
 **Directory Structure and Information** 
 
 Src (source directory) contains the handlers directory and main directory. The handlers directory contains the handlers.go file, which is used to create the lambda functions used in the various REST API calls. The main directory contains four subdirectories: create, get, delete and list. 
@@ -89,19 +115,6 @@ If you would like to build and deploy, the deploy.sh script can be used, it will
 
 There are two different types of tests, live tests which use HTTP requests to interact with the deployed REST API and unit tests for each main.go function.
 
-**Prerequisites:**
-
-Ensure the repository is cloned in to a known GOPATH/src 
-
-- Serverless framework:
-```
-npm install -g serverless
-```
-- Golang
-- dep brew:
-```
-install dep && brew upgrade dep
-```
 **Deploy:**
 
 Mac/linux :
