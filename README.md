@@ -3,7 +3,7 @@ My Rest API
 
 ---
 Project source can be downloaded from:
-https://github.com/PasinduDiss/MyRestservice.git
+https://github.com/PasinduDiss/MyRestserviceWorkspace
 ----
 
 Author
